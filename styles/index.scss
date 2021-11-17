@@ -4,7 +4,8 @@
 /* purgecss end ignore */
 @tailwind utilities;
 
+@import "./error.scss";
 
-.color-primary {
-  @apply text-red-500;
+.large {
+  @apply text-2xl;
 }

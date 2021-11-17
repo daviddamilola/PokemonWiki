@@ -1,6 +1,7 @@
 import { GetStaticProps, GetStaticPaths } from "next";
 import React from "react";
 import api from "../../services/initApi";
+import Link from "next/link";
 
 type Props = {
   pokemonsForPage: any[];
@@ -10,16 +11,29 @@ type Props = {
 const PokemonPage = ({ pokemonsForPage, errors }: Props) => {
   if (errors) {
     return (
-      <div className="w-full h-screen">
-        <h1 className="text-lg">Something went wrong!</h1>
-        <p className="text-base"><span className="text-red-500">Error is </span> : {errors}</p>
+      <div className="error_wrapper">
+        <div className="container">
+          <h1 className="text-2xl text-center">Something went wrong!</h1>
+          <p className="text-center">
+            <span className="error">Error is </span> : {errors}
+          </p>
+          <div className="flex justify-center">
+            <Link href="/">
+              <button className="text-white rounded-lg px-2 py-2 text-base bg-blue-500">
+                Refresh Page
+              </button>
+            </Link>
+          </div>
+        </div>
       </div>
     );
   }
 
-  return <div className="w-full h-screen">
+  return (
+    <div className="w-full h-screen">
       <h1>Pokemons</h1>
-  </div>;
+    </div>
+  );
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {
@@ -40,13 +54,11 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     const pokemonsForPage = await api.pokemonService.getPagePokemons(
       params?.page ?? 1
     );
-    console.log("pokemonsForPage", pokemonsForPage);
-    
-    return { props: { pokemonsForPage } };
+
+    return { props: { errors: pokemonsForPage } };
   } catch (error) {
     return { props: { errors: "Network error" } };
   }
 };
-
 
 export default PokemonPage;
