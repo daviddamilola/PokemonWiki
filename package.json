@@ -8,7 +8,9 @@
   },
   "dependencies": {
     "axios": "^0.24.0",
+    "memory-cache": "^0.2.0",
     "next": "latest",
+    "node-cache": "^5.1.2",
     "react": "^17.0.2",
     "react-dom": "^17.0.2"
   },
