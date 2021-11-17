@@ -11,12 +11,8 @@ const PokemonPage = ({ pokemonsForPage, errors }: Props) => {
   if (errors) {
     return (
       <div className="w-full h-screen">
-        <h1>Something went wrong!</h1>
-        <ul>
-          {errors.map((error: any) => (
-            <li key={error}>{error}</li>
-          ))}
-        </ul>
+        <h1 className="text-lg">Something went wrong!</h1>
+        <p className="text-base"><span className="text-red-500">Error is </span> : {errors}</p>
       </div>
     );
   }
