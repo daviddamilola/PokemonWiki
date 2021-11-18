@@ -10,8 +10,8 @@ const PokemonList = ({ items }: Props) => (
   <div>
     <ul className="pokemon-list">
       {items.map((item) => (
-        <li className="pokemon-list-item">
-          <PokemonListItem key={item.id} data={item} />
+        <li key={item.id} className="pokemon-list-item">
+          <PokemonListItem data={item} />
         </li>
       ))}
     </ul>

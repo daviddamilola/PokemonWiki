@@ -109,8 +109,6 @@ const pokemonServiceFactory = () => {
     
 
     targetPokemonsResolved = targetPokemonsResolved.length > LIMIT ? targetPokemonsResolved.slice(0,LIMIT): targetPokemonsResolved;
-
-    console.log('targetPokemonsResolved',targetPokemonsResolved);
     
     return targetPokemonsResolved;
   };
@@ -125,7 +123,6 @@ const pokemonServiceFactory = () => {
       const { results }: { results: [PokemonResult] } = await (
         await getPokemonByUrl(`${config.baseURL}pokemon?limit=${count}`)
       ).data;
-      console.log(results);
       
       pokemonCache.set("allPokemon", results);
 

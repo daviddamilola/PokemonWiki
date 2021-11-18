@@ -8,7 +8,6 @@ type Props = {
 }
 
 const PokemonListItem = ({ data }: Props) => {
-  console.log(data);
   
 return(
   <Link href={`/pokemon-detail/${data.name}`}>

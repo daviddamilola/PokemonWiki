@@ -16,7 +16,7 @@ type Props = {
 const PokemonPage = ({ pokemonsForPage, errors }: Props) => {
   const router = useRouter();
   const {
-    searchValue: { isSearching, searchResults },
+    searchValue: { isSearching, searchResults, searchTerm,  },resetSearch,
   } = useSearch();
 
   const handleNextPageClick = () => {
@@ -33,10 +33,9 @@ const PokemonPage = ({ pokemonsForPage, errors }: Props) => {
   if (isSearching) {
     return (
       <Layout title="Users List | Next.js + TypeScript Example">
-        <h1>Pokemon List</h1>
         <SearchBar />
 
-        <p>You are currently on: /</p>
+        <p>Search Results for: {searchTerm}</p> <button type="button" onClick={() => resetSearch()} className="px-2 py-2"> X clear</button>
         <PokemonList items={searchResults} />
         <p>
           <Link href="/">
@@ -46,7 +45,7 @@ const PokemonPage = ({ pokemonsForPage, errors }: Props) => {
       </Layout>
     );
   }
-  
+
   if (errors) {
     return (
       <Layout>
