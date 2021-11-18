@@ -5,6 +5,8 @@ import Link from "next/link";
 import PokemonList from "../../components/PokemonList";
 import Layout from "../../components/Layout";
 import { useRouter } from "next/router";
+import { useSearch } from "../../context/searchContext";
+import SearchBar from "../../components/SearchBar";
 
 type Props = {
   pokemonsForPage: any;
@@ -13,14 +15,38 @@ type Props = {
 
 const PokemonPage = ({ pokemonsForPage, errors }: Props) => {
   const router = useRouter();
+  const {
+    searchValue: { isSearching, searchResults },
+  } = useSearch();
 
   const handleNextPageClick = () => {
-    router.push(`/pokemons/${Number(router.query.page ? router.query.page : 1) + 1}`);
+    router.push(
+      `/pokemons/${Number(router.query.page ? router.query.page : 1) + 1}`
+    );
   };
 
   const handlePrevPageClick = () => {
-    router.push(`/pokemons/${Number(router.query.page ? router.query.page : 1) - 1}`);
+    router.push(
+      `/pokemons/${Number(router.query.page ? router.query.page : 1) - 1}`
+    );
   };
+  if (isSearching) {
+    return (
+      <Layout title="Users List | Next.js + TypeScript Example">
+        <h1>Pokemon List</h1>
+        <SearchBar />
+
+        <p>You are currently on: /</p>
+        <PokemonList items={searchResults} />
+        <p>
+          <Link href="/">
+            <a>Go home</a>
+          </Link>
+        </p>
+      </Layout>
+    );
+  }
+  
   if (errors) {
     return (
       <Layout>
@@ -45,6 +71,9 @@ const PokemonPage = ({ pokemonsForPage, errors }: Props) => {
 
   return (
     <Layout>
+      <div className="w-full mb-4">
+        <SearchBar />
+      </div>
       <div className="w-full h-full">
         <PokemonList items={pokemonsForPage.result} />
       </div>

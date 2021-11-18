@@ -22,3 +22,8 @@ export interface PokemonDetail {
   id: number;
 }
 
+export interface PokemonResult {
+  name: string;
+  url: string;
+}
+

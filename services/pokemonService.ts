@@ -1,5 +1,5 @@
 import config from "./config";
-import { PokemonDetail} from '../interfaces/'
+import { PokemonDetail, PokemonResult} from '../interfaces/'
 const NodeCache = require("node-cache");
 const cache = require("memory-cache");
 
@@ -7,7 +7,7 @@ const cache = require("memory-cache");
 const axios = config.axios;
 const LIMIT = 16;
 
-
+const pokemonCache = new NodeCache({ stdTTL: 60 * 60 });
 
 const pokemonServiceFactory = () => {
 
@@ -93,12 +93,56 @@ const pokemonServiceFactory = () => {
     const response = await axios.get(`/pokemon/${name}`);
     return response.data;
   };
+  const handleSearch = async (allPokemon, searchTerm) => {
+      
+    const searchTermLower = searchTerm.toLowerCase();
+    
+    const targetPokemonsUrls = allPokemon
+      .filter((pokemon) => {
+        return (pokemon.name.toLowerCase().includes(searchTermLower) || pokemon.name.toLowerCase() === searchTermLower);
+      })
+      .map((pokemon) => pokemon.url);
+
+      
+
+    let targetPokemonsResolved = await getPokemonsDetailsByUrls(
+      targetPokemonsUrls
+    );
+
+    
+
+    targetPokemonsResolved = targetPokemonsResolved.length > LIMIT ? targetPokemonsResolved.slice(0,LIMIT): targetPokemonsResolved;
+
+    console.log('targetPokemonsResolved',targetPokemonsResolved);
+    
+    return targetPokemonsResolved;
+  };
+
+  const searchForPokemon = async (searchTerm: string) => {
+    
+    let allPokemon: PokemonResult[] = pokemonCache.get("allPokemon");
+    if (!allPokemon) {
+      const { count }: { count: number } = (
+        await getPokemonByUrl(`${config.baseURL}pokemon`)
+      ).data;
+      const { results }: { results: [PokemonResult] } = await (
+        await getPokemonByUrl(`${config.baseURL}pokemon?limit=${count}`)
+      ).data;
+      console.log(results);
+      
+      pokemonCache.set("allPokemon", results);
+
+      allPokemon = pokemonCache.get("allPokemon");
+    }
+    return await handleSearch(allPokemon, searchTerm);
+  };
 
   return {
     getPokemonByUrl,
     getPagePokemons,
     getPagePokemonPagination,
     getPokemonByName,
+    searchForPokemon,
   };
 };
 
