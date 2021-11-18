@@ -32,7 +32,6 @@ export const SearchProvider = ({ children }) => {
   };
 
   const resetSearch = () => {
-    console.log('clicked reset');
     
     setSearchValues({ isSearching: false, searchResults: [], searchTerm: "" });
   };

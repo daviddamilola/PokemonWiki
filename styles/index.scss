@@ -4,20 +4,24 @@
 /* purgecss end ignore */
 @tailwind utilities;
 
-@import "./error.scss";
-
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;1,400;1,900&display=swap');
+body{
+  font-family: 'Poppins', sans-serif;
+  font-weight: bold;
+}
 .large {
   @apply text-2xl;
 }
 
 .pokemon-list-item{
   width: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
   min-height: 300px;
   @apply shadow-md outline-none;
 }
 
-.searchbox{
-}
 
 .pokemon-list{
   width: 90%;
@@ -26,6 +30,10 @@
   grid-template-columns: 1fr;
   grid-gap: 20px;
   @apply mt-4;
+}
+
+.search button{
+  width: 150px;
 }
 
 .pokemon-detail{
@@ -37,7 +45,10 @@
   &__container{
     width: 90%;
     margin: 0 auto;
-    height: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    
   }
 }
 
@@ -55,4 +66,9 @@
   .pokemon-list{
     grid-template-columns: 1fr 1fr 1fr;
   }
+  .layout__container{
+    width: 70%;
+    margin: 0 auto;
+  }
 }
+

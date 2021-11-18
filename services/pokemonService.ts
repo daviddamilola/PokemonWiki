@@ -49,8 +49,19 @@ const pokemonServiceFactory = () => {
 
     const pokemonPromisesResolved = await getPokemonsDetailsByUrls(pokemonUrls);
 
-    const result = pokemonPromisesResolved.map((listItem: PokemonDetail) => ({
-      ...listItem
+    const result = pokemonPromisesResolved.map((pokemon: PokemonDetail) => ({
+      name: pokemon.name,
+      id: pokemon.id,
+      imageUrl: pokemon.sprites.other['official-artwork'].front_default || pokemon.sprites.front_default,
+      species: pokemon.species.name,
+      types: pokemon.types.map((type: any) => type.type.name),
+      stats: pokemon.stats.map((stat: any) => ({
+        name: stat.stat.name,
+        value: stat.base_stat,
+      })),
+      weight: pokemon.weight,
+      height: pokemon.height,
+      moves: pokemon.moves.map((move: any) => move.move.name),
     }));
 
     const totalPages = Math.ceil(pokemonNamesAndUrlResult.count / LIMIT);
@@ -88,7 +99,20 @@ const pokemonServiceFactory = () => {
 
   const getPokemonByName = async (name?: number) => {
     const response = await axios.get(`/pokemon/${name}`);
-    return response.data;
+    return {
+        name: response.data.name,
+        id: response.data.id,
+        imageUrl: response.data.sprites.other['official-artwork'].front_default || response.data.sprites.front_default,
+        species: response.data.species.name,
+        types: response.data.types.map((type: any) => type.type.name),
+        stats: response.data.stats.map((stat: any) => ({
+          name: stat.stat.name,
+          value: stat.base_stat,
+        })),
+        weight: response.data.weight,
+        height: response.data.height,
+        moves: response.data.moves.map((move: any) => move.move.name),
+    };
   };
   const handleSearch = async (allPokemon, searchTerm) => {
       

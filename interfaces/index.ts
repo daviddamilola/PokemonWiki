@@ -11,15 +11,14 @@ export type User = {
 
 export interface PokemonDetail {
   name: string;
-  species: {
-    name:string;
-    url:string;
-  };
-  sprites: {
-    front_default:string;
-  }
-  types: string[];
   id: number;
+  imageUrl: string;
+  species: string;
+  types: string[];
+  stats: {[key: string]: number}[];
+  weight: number;
+  height: number;
+  moves: string[];
 }
 
 export interface PokemonResult {

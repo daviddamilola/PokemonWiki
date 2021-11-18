@@ -12,9 +12,9 @@ const PokemonListItem = ({ data }: Props) => {
 return(
   <Link href={`/pokemon-detail/${data.name}`}>
     <a className="pokemon-list-item">
-      <img src={data.sprites.front_default} width="100%" height="150px" />
+      <img src={data.imageUrl} width="50%" height="75px" />
       <div className="px-4">
-        <h3 className="text-xl">Name: {data.name}</h3>
+        <h3 className="text-xl text-center">Name: {data.name}</h3>
       </div>
     </a>
   </Link>

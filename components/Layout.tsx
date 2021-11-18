@@ -8,7 +8,7 @@ type Props = {
 }
 
 const Layout = ({ children, title = 'Pokemon - List' }: Props) => (
-  <div>
+  <div className="layout">
     <Head>
       <title>{title}</title>
       <meta charSet="utf-8" />
@@ -21,7 +21,9 @@ const Layout = ({ children, title = 'Pokemon - List' }: Props) => (
         </Link>
       </nav>
     </header>
-    {children}
+    <div className="layout__container">
+      {children}
+    </div>
   </div>
 )
 
