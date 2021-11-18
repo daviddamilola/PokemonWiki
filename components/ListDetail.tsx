@@ -1,5 +1,6 @@
+import router from "next/router";
 import * as React from "react";
-
+import { useRouter } from "next/router";
 import { PokemonDetail } from "../interfaces";
 
 type ListDetailProps = {
@@ -7,10 +8,14 @@ type ListDetailProps = {
 };
 
 const ListDetail = ({ item: pokemon }: ListDetailProps) => {
-  console.log(pokemon);
+  const rotuer = useRouter();
+  const handleGoBack = () => {
+    router.back();
+  }
   
   return (
     <div className="pokemon-detail">
+      <div className="flex justify-self-start mt-4 ml-4 "><button type="button" onClick={handleGoBack} className="bg-black text-white px-4">{'<'} Back</button></div>
       <div className="w-full pokemon-detail__container">
         <h1 className="text-center mt-8">Detail for {pokemon.name}</h1>
         <div className="w-full flex justify-center">
