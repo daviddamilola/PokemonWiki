@@ -87,10 +87,18 @@ const pokemonServiceFactory = () => {
     return paginationPaths
   };
 
+  
+
+  const getPokemonByName = async (name?: number) => {
+    const response = await axios.get(`/pokemon/${name}`);
+    return response.data;
+  };
+
   return {
     getPokemonByUrl,
     getPagePokemons,
     getPagePokemonPagination,
+    getPokemonByName,
   };
 };
 

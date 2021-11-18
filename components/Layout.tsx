@@ -7,7 +7,7 @@ type Props = {
   title?: string
 }
 
-const Layout = ({ children, title = 'This is the default title' }: Props) => (
+const Layout = ({ children, title = 'Pokemon - List' }: Props) => (
   <div>
     <Head>
       <title>{title}</title>
@@ -17,15 +17,11 @@ const Layout = ({ children, title = 'This is the default title' }: Props) => (
     <header>
       <nav className="py-4 px-4 bg-black text-white">
         <Link href="/">
-          <a>Home</a>
+          <a>POKEMON WIKI</a>
         </Link>
       </nav>
     </header>
     {children}
-    <footer>
-      <hr />
-      <span>I'm here to stay (Footer)</span>
-    </footer>
   </div>
 )
 

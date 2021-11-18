@@ -1,15 +1,13 @@
 import React from 'react'
 import Link from 'next/link'
-import Image from 'next/image'
 
-import { User } from '../interfaces'
+import { PokemonDetail } from '../interfaces'
 
 type Props = {
-  data: User
+  data: PokemonDetail
 }
 
 const PokemonListItem = ({ data }: Props) => {
-  console.log(data);
   
 return(
   <Link href={`/pokemon-detail/${data.name}`}>
