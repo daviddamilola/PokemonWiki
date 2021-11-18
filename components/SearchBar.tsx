@@ -1,17 +1,16 @@
 import React, {
-  ReactElement,
   SyntheticEvent,
   useEffect,
   useState,
 } from "react";
 import { useDebounce } from "../services/hooks";
-import searchContext, { useSearch } from "../context/searchContext";
+import { useSearch } from "../context/searchContext";
 import api from "../services/initApi";
 
 export default function SearchBar() {
   const [value, setValue] = useState("");
 
-  const { setIsSearching, setSearchResults ,resetSearch, setBeginSearch, searchValue: {isSearching} } = useSearch();
+  const { setSearchResults ,resetSearch, setBeginSearch, searchValue: {isSearching} } = useSearch();
 
   const handleSearch = async (term) => {
     if (!term) {
