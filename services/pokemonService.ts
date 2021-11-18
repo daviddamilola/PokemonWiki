@@ -28,7 +28,21 @@ const pokemonServiceFactory = () => {
       arrayOfUrls.map((url) => getPokemonByUrl(url))
     );
     return pokemonDetailsResolved.map(
-      (eachPokemonResponse) => eachPokemonResponse.data
+      (eachPokemonResponse) => ({
+          name: eachPokemonResponse.data.name,
+          id: eachPokemonResponse.data.id,
+          imageUrl: eachPokemonResponse.data.sprites.other['official-artwork'].front_default || eachPokemonResponse.data.sprites.front_default,
+          species: eachPokemonResponse.data.species.name,
+          types: eachPokemonResponse.data.types.map((type: any) => type.type.name),
+          stats: eachPokemonResponse.data.stats.map((stat: any) => ({
+            name: stat.stat.name,
+            value: stat.base_stat,
+          })),
+          weight: eachPokemonResponse.data.weight,
+          height: eachPokemonResponse.data.height,
+          moves: eachPokemonResponse.data.moves.map((move: any) => move.move.name),
+      
+      })
     );
   };
 
@@ -49,27 +63,14 @@ const pokemonServiceFactory = () => {
 
     const pokemonPromisesResolved = await getPokemonsDetailsByUrls(pokemonUrls);
 
-    const result = pokemonPromisesResolved.map((pokemon: PokemonDetail) => ({
-      name: pokemon.name,
-      id: pokemon.id,
-      imageUrl: pokemon.sprites.other['official-artwork'].front_default || pokemon.sprites.front_default,
-      species: pokemon.species.name,
-      types: pokemon.types.map((type: any) => type.type.name),
-      stats: pokemon.stats.map((stat: any) => ({
-        name: stat.stat.name,
-        value: stat.base_stat,
-      })),
-      weight: pokemon.weight,
-      height: pokemon.height,
-      moves: pokemon.moves.map((move: any) => move.move.name),
-    }));
+    const result = pokemonPromisesResolved
 
     const totalPages = Math.ceil(pokemonNamesAndUrlResult.count / LIMIT);
 
     const pagination = {
       currentPage: page,
       nextPage: page >= totalPages ? null : page + 1,
-      previousPage: page > 2 ? page - 1 : null,
+      previousPage: page > 1 ? page - 1 : null,
       totalPages,
     }
 

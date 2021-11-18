@@ -10,7 +10,7 @@ import api from "../services/initApi";
 export default function SearchBar() {
   const [value, setValue] = useState("");
 
-  const { setSearchResults ,resetSearch, setBeginSearch, searchValue: {isSearching} } = useSearch();
+  const { setSearchResults ,resetSearch, setBeginSearch, searchValue: {searchLoading} } = useSearch();
 
   const handleSearch = async (term) => {
     if (!term) {
@@ -45,7 +45,7 @@ export default function SearchBar() {
   return (
     <form className="search flex mx-1 mt-4" onSubmit={handleSubmit}>
       <input placeholder="Search by name" className="w-full px-2 py-0 outline-none ring-1 ring-black" onChange={handleChange} value={value} />
-      <button type="submit" className="bg-black text-white px-2 py-2">{isSearching? 'searching' :'Submit'}</button>
+      <button type="submit" className="bg-black text-white px-2 py-2">{searchLoading? 'searching' :'Submit'}</button>
     </form>
   );
 }

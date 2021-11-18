@@ -10,10 +10,11 @@ export type User = {
 }
 
 export interface PokemonDetail {
+  sprites: any;
   name: string;
   id: number;
   imageUrl: string;
-  species: string;
+  species: {[key: string]: any};
   types: string[];
   stats: {[key: string]: number}[];
   weight: number;

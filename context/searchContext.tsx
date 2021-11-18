@@ -5,6 +5,7 @@ export const SearchContext = createContext(null);
 export const SearchProvider = ({ children }) => {
   const [searchValue, setSearchValues] = React.useState({
     isSearching: false,
+    searchLoading: false,
     searchResults: [],
     searchTerm: "",
   });
@@ -14,6 +15,7 @@ export const SearchProvider = ({ children }) => {
       ...searchValue,
       searchTerm,
       isSearching: true,
+      searchLoading: true,
     });
   }
 
@@ -28,12 +30,13 @@ export const SearchProvider = ({ children }) => {
     setSearchValues((prevState) => ({
       ...prevState,
       searchResults,
+      searchLoading: false,
     }));
   };
 
   const resetSearch = () => {
     
-    setSearchValues({ isSearching: false, searchResults: [], searchTerm: "" });
+    setSearchValues({ isSearching: false, searchResults: [], searchTerm: "", searchLoading: false });
   };
   return (
     <SearchContext.Provider

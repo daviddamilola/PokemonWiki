@@ -1,47 +1,48 @@
-# TypeScript Next.js example
+# Description
 
-This is a really simple project that shows the usage of Next.js with TypeScript.
+Pokeman Wiki is an application to browse and search for pokeman characters
 
-## Preview
+### Features
 
-Preview the example live on [StackBlitz](http://stackblitz.com/):
+- List of all pokemons, paginated by 16 items per page
+- Text Search of pokemons by their names
+- Detail of each pokeman characters 
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/vercel/next.js/tree/canary/examples/with-typescript)
+### Screenshots
 
-## Deploy your own
+### Technologies used
+- React, Nextjs , Typescript, Tailwind css
 
-Deploy the example using [Vercel](https://vercel.com?utm_source=github&utm_medium=readme&utm_campaign=next-example):
+### How to install
+- `git clone` the repository via `https://github.com/daviddamilola/PokemonWiki.git`
+- run `yarn install` to get the neccessary dependencies
+- run `yarn dev` to start the application
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/git/external?repository-url=https://github.com/vercel/next.js/tree/canary/examples/with-typescript&project-name=with-typescript&repository-name=with-typescript)
-
-## How to use it?
-
-Execute [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app) with [npm](https://docs.npmjs.com/cli/init) or [Yarn](https://yarnpkg.com/lang/en/docs/cli/create/) to bootstrap the example:
-
-```bash
-npx create-next-app --example with-typescript with-typescript-app
-# or
-yarn create next-app --example with-typescript with-typescript-app
+### Approach Taken:
+-  https://pokeapi.co was used as the pokemon service.
+-  The service was instantiated by `initApi` function in the services folder
+-  the custom styles are defined in the styles folder and makes use of tailwinds utility classes.
+-  all pokemons are cached when searching, and the search input field is debounced to improve the user experience on the app
+-  the paginated routes are also cached to improve load times
+-  context api is used to store search data and search states.
+-  A mobile first approach was used to make the app responsive
+-  other services can be added to the app by adding their respective factories to the apiServiceFactory.
+```
+const api = apiServiceFactory({
+  store: {
+    pokemonService: pokemonServiceFactory(),
+    anotherService: anotherServiceFactory(),
+  },
+});
 ```
 
-Deploy it to the cloud with [Vercel](https://vercel.com/new?utm_source=github&utm_medium=readme&utm_campaign=next-example) ([Documentation](https://nextjs.org/docs/deployment)).
+### Areas to improve upon:
+-  The search is done by using the pokemons name as the search term, other fields can be used as a search term in the future.
+-  The styling of the application can be improved upon.
+-  The images can be loaded in lazily to improve the performance of the app.
 
-## Notes
 
-This example shows how to integrate the TypeScript type system into Next.js. Since TypeScript is supported out of the box with Next.js, all we have to do is to install TypeScript.
+### License
+MIT
 
-```
-npm install --save-dev typescript
-```
 
-To enable TypeScript's features, we install the type declarations for React and Node.
-
-```
-npm install --save-dev @types/react @types/react-dom @types/node
-```
-
-When we run `next dev` the next time, Next.js will start looking for any `.ts` or `.tsx` files in our project and builds it. It even automatically creates a `tsconfig.json` file for our project with the recommended settings.
-
-Next.js has built-in TypeScript declarations, so we'll get autocompletion for Next.js' modules straight away.
-
-A `type-check` script is also added to `package.json`, which runs TypeScript's `tsc` CLI in `noEmit` mode to run type-checking separately. You can then include this, for example, in your `test` scripts.
