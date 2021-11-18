@@ -15,14 +15,6 @@ const PokemonList = ({ items }: Props) => (
         </li>
       ))}
     </ul>
-    <div className="flex justify-center items-center">
-      <button className="pagination__btn"> {'<'} </button> 
-      <span className="ml-2"> Page </span>
-      <span className="ml-2"> 1 </span>
-      <span className="ml-2"> Of </span>
-      <span className="ml-2"> Page </span>
-      <button className="pagination__btn ml-2"> {'>'} </button>
-    </div>
   </div>
 
 );

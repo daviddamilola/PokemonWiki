@@ -1,15 +1,19 @@
 import * as React from 'react'
 
-import { User } from '../interfaces'
+import { PokemonDetail } from '../interfaces'
 
 type ListDetailProps = {
-  item: User
+  item: PokemonDetail
 }
 
-const ListDetail = ({ item: user }: ListDetailProps) => (
-  <div>
-    <h1>Detail for {user.name}</h1>
-    <p>ID: {user.id}</p>
+const ListDetail = ({ item: pokemon }: ListDetailProps) => (
+  <div className="pokemon-detail">
+    <div className="w-full pokemon-detail__container">
+
+    </div>
+    <h1 className="text-center mb-8">Detail for {pokemon.name}</h1>
+    <img src={pokemon.sprite.front_shiny} alt="pokemon image" />
+    <p>ID: {pokemon.id}</p>
   </div>
 )
 
