@@ -50,10 +50,7 @@ const pokemonServiceFactory = () => {
     const pokemonPromisesResolved = await getPokemonsDetailsByUrls(pokemonUrls);
 
     const result = pokemonPromisesResolved.map((listItem: PokemonDetail) => ({
-      name: listItem.name,
-      species: listItem.species,
-      types: listItem.types,
-      sprite: listItem.sprites,
+      ...listItem
     }));
 
     const totalPages = Math.ceil(pokemonNamesAndUrlResult.count / LIMIT);

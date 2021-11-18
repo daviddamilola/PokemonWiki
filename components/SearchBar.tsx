@@ -25,6 +25,11 @@ export default function SearchBar() {
 
   const debouncedValue = useDebounce(value, 800);
 
+  const handleSubmit = (e: SyntheticEvent) => {
+    e.preventDefault();
+    handleSearch(value);
+  }
+
   useEffect(() => {
     if (debouncedValue) {
       handleSearch(debouncedValue);
@@ -44,9 +49,9 @@ export default function SearchBar() {
   };
 
   return (
-    <div className="flex mx-1 mt-4">
+    <form className="flex mx-1 mt-4" onSubmit={handleSubmit}>
       <input placeholder="Search by name" className=" px-2 py-2  searchbox outline-none ring ring-2 ring-black" onChange={handleChange} value={value} />
-      <button className="bg-black text-white px-2 py-2">Submit</button>
-    </div>
+      <button type="submit" className="bg-black text-white px-2 py-2">Submit</button>
+    </form>
   );
 }
