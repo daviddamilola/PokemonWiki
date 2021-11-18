@@ -9,3 +9,34 @@
 .large {
   @apply text-2xl;
 }
+
+.pokemon-list-item{
+  width: 100%;
+  min-height: 300px;
+  @apply shadow-md outline-none;
+}
+
+.pokemon-list{
+  width: 90%;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-gap: 20px;
+  @apply mt-4;
+}
+
+.pagination__btn{
+  @apply bg-gray-800 hover:bg-black text-white font-bold py-2 px-4 rounded;
+}
+
+@screen md {
+  .pokemon-list{
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@screen lg {
+  .pokemon-list{
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}

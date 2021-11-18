@@ -1,4 +1,5 @@
 import config from "./config";
+import { PokemonDetail} from '../interfaces/'
 const NodeCache = require("node-cache");
 const cache = require("memory-cache");
 
@@ -6,11 +7,6 @@ const cache = require("memory-cache");
 const axios = config.axios;
 const LIMIT = 16;
 
-interface PokemonDetails {
-  name: string;
-  species: string;
-  types: string[];
-}
 
 
 const pokemonServiceFactory = () => {
@@ -53,10 +49,11 @@ const pokemonServiceFactory = () => {
 
     const pokemonPromisesResolved = await getPokemonsDetailsByUrls(pokemonUrls);
 
-    const result = pokemonPromisesResolved.map((listItem: PokemonDetails) => ({
+    const result = pokemonPromisesResolved.map((listItem: PokemonDetail) => ({
       name: listItem.name,
       species: listItem.species,
       types: listItem.types,
+      sprite: listItem.sprites,
     }));
 
     const totalPages = Math.ceil(pokemonNamesAndUrlResult.count / LIMIT);

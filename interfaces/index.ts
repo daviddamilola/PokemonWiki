@@ -8,3 +8,17 @@ export type User = {
   id: number
   name: string
 }
+
+export interface PokemonDetail {
+  name: string;
+  species: {
+    name:string;
+    url:string;
+  };
+  sprites: {
+    front_default:string;
+  }
+  types: string[];
+  id: number;
+}
+
