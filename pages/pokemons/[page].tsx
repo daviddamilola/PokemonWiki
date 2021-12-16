@@ -7,6 +7,7 @@ import Layout from "../../components/Layout";
 import { useRouter } from "next/router";
 import { useSearch } from "../../context/searchContext";
 import SearchBar from "../../components/SearchBar";
+import Pagination from "../../components/Pagination";
 
 type Props = {
   pokemonsForPage: any;
@@ -16,7 +17,8 @@ type Props = {
 const PokemonPage = ({ pokemonsForPage, errors }: Props) => {
   const router = useRouter();
   const {
-    searchValue: { isSearching, searchResults, searchTerm },resetSearch,
+    searchValue: { isSearching, searchResults, searchTerm },
+    resetSearch,
   } = useSearch();
 
   const handleNextPageClick = () => {
@@ -34,10 +36,16 @@ const PokemonPage = ({ pokemonsForPage, errors }: Props) => {
     return (
       <Layout>
         <SearchBar />
-
-        <p>Search Results for: {searchTerm}</p> <button type="button" onClick={() => resetSearch()} className="px-2 py-2"> X clear</button>
+        <p>Search Results for: {searchTerm}</p>{" "}
+        <button
+          type="button"
+          onClick={() => resetSearch()}
+          className="px-2 py-2"
+        >
+          {" "}
+          X clear
+        </button>
         <PokemonList items={searchResults} />
-      
       </Layout>
     );
   }
@@ -72,25 +80,12 @@ const PokemonPage = ({ pokemonsForPage, errors }: Props) => {
       <div className="w-full h-full">
         <PokemonList items={pokemonsForPage.result} />
       </div>
-      <div className=" mt-4 flex justify-center items-center">
-        <button
-          disabled={!pokemonsForPage.pagination.previousPage}
-          onClick={handlePrevPageClick}
-          className="pagination__btn"
-        >
-          {"<"}
-        </button>
-        <span className="ml-2"> Page </span>
-        <span className="ml-2"> {pokemonsForPage.pagination.currentPage} </span>
-        <span className="ml-2"> Of </span>
-        <span className="ml-2"> {pokemonsForPage.pagination.totalPages} </span>
-        <button
-          disabled={!pokemonsForPage.pagination.nextPage}
-          onClick={handleNextPageClick}
-          className="pagination__btn ml-2"
-        >
-          {">"}
-        </button>
+      <div className="my-4">
+        <Pagination
+          pagination={pokemonsForPage.pagination}
+          handlePrevPageClick={handlePrevPageClick}
+          handleNextPageClick={handleNextPageClick}
+        />
       </div>
     </Layout>
   );

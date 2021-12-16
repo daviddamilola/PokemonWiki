@@ -2,13 +2,14 @@ import { GetServerSideProps } from 'next'
 import Layout from '../../components/Layout'
 import ListDetail from '../../components/ListDetail'
 import api from '../../services/initApi'
+import {IPokemonDetail} from '../../interfaces'
 
 type Props = {
-  item?: any
+  item?: IPokemonDetail
   errors?: string
 }
 
-const StaticPropsDetail = ({ item, errors }: Props) => {
+const PokemonDetail = ({ item, errors }: Props) => {
   if (errors) {
     return (
       <Layout title="Error">
@@ -30,17 +31,13 @@ const StaticPropsDetail = ({ item, errors }: Props) => {
   )
 }
 
-export default StaticPropsDetail
+export default PokemonDetail
 
-// This function gets called at build time on server-side.
-// It won't be called on client-side, so you can even do
-// direct database queries.
+
 export const getServerSideProps: GetServerSideProps = async ({ params }) => {
   try {
     const name = params?.name
-    const item = await api.pokemonService.getPokemonByName(name)
-    // By returning { props: item }, the StaticPropsDetail component
-    // will receive `item` as a prop at build time
+    const item:Promise<IPokemonDetail> = await api.pokemonService.getPokemonByName(name)
     return { props: { item } }
   } catch (err) {
     return { props: { errors: err.message } }

@@ -1,9 +1,9 @@
 import * as React from "react";
 import PokemonListItem from "./PokemonListItem";
-import { PokemonDetail } from "../interfaces";
+import { IPokemonDetail } from "../interfaces";
 
 type Props = {
-  items: PokemonDetail[];
+  items: IPokemonDetail[];
 };
 
 const PokemonList = ({ items }: Props) => (

@@ -1,16 +1,5 @@
-// You can include shared interfaces/types in a separate file
-// and then use them in any component by importing them. For
-// example, to import the interface below do:
-//
-// import { User } from 'path/to/interfaces';
 
-export type User = {
-  id: number
-  name: string
-}
-
-export interface PokemonDetail {
-  sprites: any;
+export interface IPokemonDetail {
   name: string;
   id: number;
   imageUrl: string;
@@ -22,8 +11,16 @@ export interface PokemonDetail {
   moves: string[];
 }
 
-export interface PokemonResult {
+export interface IPokemonResult {
   name: string;
   url: string;
 }
+
+export interface IPagination {
+  currentPage: number,
+  nextPage: number,
+  previousPage: number,
+  totalPages: number,
+};
+
 

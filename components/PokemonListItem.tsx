@@ -1,10 +1,10 @@
 import React from 'react'
 import Link from 'next/link'
 
-import { PokemonDetail } from '../interfaces'
+import { IPokemonDetail } from '../interfaces'
 
 type Props = {
-  data: PokemonDetail
+  data: IPokemonDetail
 }
 
 const PokemonListItem = ({ data }: Props) => {
