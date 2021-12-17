@@ -2,6 +2,9 @@
 
 Pokeman Wiki is an application to browse and search for pokeman characters
 
+### Live
+https://61bce824f2849f00080c3dfa--quizzical-bardeen-5b7b24.netlify.app/
+
 ### Features
 
 - List of all pokemons, paginated by 16 items per page
