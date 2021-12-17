@@ -1,10 +1,10 @@
 import router from "next/router";
 import * as React from "react";
 import { useRouter } from "next/router";
-import { PokemonDetail } from "../interfaces";
+import { IPokemonDetail } from "../interfaces";
 
 type ListDetailProps = {
-  item: PokemonDetail;
+  item: IPokemonDetail;
 };
 
 const ListDetail = ({ item: pokemon }: ListDetailProps) => {
