@@ -2,6 +2,7 @@ import router from "next/router";
 import * as React from "react";
 import { useRouter } from "next/router";
 import { IPokemonDetail } from "../interfaces";
+import Image from "next/image";
 
 type ListDetailProps = {
   item: IPokemonDetail;
@@ -19,7 +20,7 @@ const ListDetail = ({ item: pokemon }: ListDetailProps) => {
       <div className="w-full pokemon-detail__container">
         <h1 className="text-center mt-8">Detail for {pokemon.name}</h1>
         <div className="w-full flex justify-center">
-          <img
+          <Image
             width="150px"
             height="150px"
             src={pokemon?.imageUrl}
