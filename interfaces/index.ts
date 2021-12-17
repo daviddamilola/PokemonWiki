@@ -3,6 +3,7 @@ export interface IPokemonDetail {
   name: string;
   id: number;
   imageUrl: string;
+  placeholder: string;
   species: {[key: string]: any};
   types: string[];
   stats: {[key: string]: number}[];

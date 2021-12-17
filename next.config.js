@@ -6,7 +6,7 @@ module.exports = {
   },
   images: {
     domains: [
-      "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites",
+      "raw.githubusercontent.com",
     ],
   },
 };

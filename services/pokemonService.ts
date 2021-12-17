@@ -41,6 +41,7 @@ const pokemonServiceFactory = () => {
       })),
       weight: eachPokemonResponse.weight,
       height: eachPokemonResponse.height,
+      placeholder: eachPokemonResponse.sprites.front_default,
       moves: eachPokemonResponse.moves.map((move: any) => move.move.name),
     }));
   };
@@ -109,6 +110,8 @@ const pokemonServiceFactory = () => {
       })),
       weight: response.data.weight,
       height: response.data.height,
+      placeholder: response.data.sprites.front_default,
+
       moves: response.data.moves.map((move: any) => move.move.name),
     };
   };
