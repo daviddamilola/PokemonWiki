@@ -14,7 +14,7 @@ export default function SearchBar() {
 
   const handleSearch = async (term) => {
     if (!term) {
-      resetSearch();
+      // resetSearch();
       return
     };
     setBeginSearch(term);

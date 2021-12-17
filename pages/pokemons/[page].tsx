@@ -8,10 +8,14 @@ import { useRouter } from "next/router";
 import { useSearch } from "../../context/searchContext";
 import SearchBar from "../../components/SearchBar";
 import Pagination from "../../components/Pagination";
+import { IPagination, IPokemonDetail } from "../../interfaces";
 
 type Props = {
-  pokemonsForPage: any;
-  errors: any;
+  pokemonsForPage: {
+    result: IPokemonDetail[],
+    pagination: IPagination,
+  };
+  errors: string;
 };
 
 const PokemonPage = ({ pokemonsForPage, errors }: Props) => {
@@ -36,15 +40,17 @@ const PokemonPage = ({ pokemonsForPage, errors }: Props) => {
     return (
       <Layout>
         <SearchBar />
-        <p>Search Results for: {searchTerm}</p>{" "}
+        <div className="flex justify-between items-center">
+        <p className="my-4">Search Results for: {searchTerm}</p>{" "}
         <button
           type="button"
           onClick={() => resetSearch()}
-          className="px-2 py-2"
+          className="px-2 py-2 bg-black text-white"
         >
-          {" "}
-          X clear
+          X Clear Search Results
         </button>
+          </div>
+
         <PokemonList items={searchResults} />
       </Layout>
     );
